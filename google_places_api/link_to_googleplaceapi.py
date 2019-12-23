@@ -1,4 +1,3 @@
-# https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=oth regensburg &inputtype=textquery&&fields=formatted_address,geometry,icon,name,permanently_closed,photos,place_id,plus_code,types,price_level,rating,user_ratings_total&key=AIzaSyCQswbYWWEkoR31K3Xz3zoGFOrpN1FYc0M
 import configparser
 import json
 
