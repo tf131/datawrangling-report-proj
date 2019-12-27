@@ -15,8 +15,8 @@ def get_mongodb_db(db_name):
     client = MongoClient(config['mongodb']['connection_string'])
     return client[db_name]
 
-def get_dpl_df():
 
+def get_dpl_df():
     db = get_mongodb_db("restaurants")
     collection = db["restaurants_basic"]
     results = collection.aggregate([
@@ -76,3 +76,31 @@ def get_dpl_df():
     list_of_duplicates.sort(key=lambda i: i[0])
 
     return pd.DataFrame(list_of_duplicates, columns=['id1', 'id2'])
+
+
+def get_all_permutations2():
+    elem_list = list()
+    list_of_all_pairs = list()
+    db = get_mongodb_db("restaurants")
+    collection = db["restaurants_basic"]
+    results = collection.aggregate([
+        {
+            '$addFields': {
+                'id_to_int': {
+                    '$toInt': '$id'
+                }
+            }
+        }, {
+            '$project': {
+                'id_to_int': 1,
+                '_id': 0
+            }}])
+    for elem in results:
+        elem_list.append(elem['id_to_int'])
+    perm = itertools.combinations(elem_list, 2)
+    for p in list(perm):
+        tmplist_for_converting_from_tuple = list(p)
+        list_of_all_pairs.append(tmplist_for_converting_from_tuple)
+        list_of_all_pairs.sort(key=lambda i: i[0])
+
+    return pd.DataFrame(results, columns=['id1', 'id2'])
