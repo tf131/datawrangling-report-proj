@@ -1,4 +1,4 @@
-# This script imports the data from the restaurant to mongodb
+# This script imports the data from the restaurants.tsv to a mongodb database
 
 
 import configparser

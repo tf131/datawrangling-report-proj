@@ -1,3 +1,4 @@
+# adds (when possible) a document from here api to the refering database entry - if the here reply was empty, the item remains unchanged
 import configparser
 
 import requests

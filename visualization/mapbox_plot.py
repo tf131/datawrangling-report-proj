@@ -2,11 +2,20 @@ from pymongo import MongoClient
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import logging
+import configparser
+
+# configure logging
+logging.basicConfig(level=logging.DEBUG)
+
+# load the configfile
+config = configparser.ConfigParser()
+
+config.read('../conf.ini')
 
 
 def get_mongodb_db(db_name):
-    client = MongoClient(
-        "mongodb+srv://tim:fxPgQrWtKb8MY2x5FtkY@cluster4report-dmdb-4pvyi.mongodb.net/test?retryWrites=true&w=majority")
+    client = MongoClient(config['mongodb']['connection_string'])
     return client[db_name]
 
 
@@ -32,7 +41,7 @@ for elem in results_raw:
     dict_ = {"id": id, "name": name, "latitude": lat, "longitude": lng}
     list_of_dicts.append(dict_)
 df = pd.DataFrame.from_dict(list_of_dicts, orient='columns')
-print(df.head(5))
+
 BBox = ((df.longitude.min(), df.longitude.max(),
          df.latitude.min(), df.latitude.max()))
 

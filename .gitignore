@@ -131,3 +131,6 @@ dmypy.json
 
 #config
 *.ini
+
+#dev
+/dev

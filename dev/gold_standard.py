@@ -1,7 +1,3 @@
-import pandas as pd
-from dupl_calc import google_places_api_quality_v2
-from dupl_calc import here_quality_of_linking
-
 # df_dpl = pd.read_csv("../data/restaurants_DPL.tsv", sep='\t')
 # df_ndpl = pd.read_csv("../data/restaurants_NDPL.tsv", sep='\t')
 # df_dpl_google = google_places_api_quality_of_linking.get_dpl_df()

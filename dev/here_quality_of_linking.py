@@ -76,3 +76,12 @@ def get_dpl_df():
     list_of_duplicates.sort(key=lambda i: i[0])
 
     return pd.DataFrame(list_of_duplicates, columns=['id1', 'id2'])
+
+
+def get_non_dpl_with_where_operator():
+    # pymongo.errors.OperationFailure: $where is not allowed in this atlas tier
+    db = get_mongodb_db("restaurants")
+    collection = db["restaurants_basic"]
+    result = collection.find(
+        {"$where": "this.google_place_search_api_result.place_id==this.google_place_search_api_result.place_id"})
+    return result

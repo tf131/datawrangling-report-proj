@@ -1,8 +1,0 @@
-1. python code: muss am stück ausführbar sein? api codes anonymisieren?
-    set up: linux/windows
-    code im paper?
-
-2. Duplikate finden mit REST api's - Vergleich der beiden: here & google inkl. values
-        wie berechnen wenn mehrere duplikate herauskommen? -prec, fscore etc
-
-3. visualize: coordinates, price level, etc

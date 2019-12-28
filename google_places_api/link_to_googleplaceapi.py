@@ -1,3 +1,4 @@
+#adds (when possible) a document from google places api to the refering database entry - if the google places reply was empty, the item remains unchanged
 import configparser
 import json
 
