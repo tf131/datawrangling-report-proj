@@ -8,9 +8,10 @@ import logging
 # load the configfile
 config = configparser.ConfigParser()
 config.read('../conf.ini')
+api_key = config['api_keys']['here']
 
 logging.basicConfig(level=logging.WARN)
-URL = "https://geocoder.ls.hereapi.com/6.2/geocode.json?apikey=k3U8PYFtZ5RqC7il9HJxr9OAa4kGWY08ozdv4FpQRAo&searchtext="
+URL = "https://geocoder.ls.hereapi.com/6.2/geocode.json?apikey=" + api_key + "&searchtext="
 
 
 def get_mongodb_db(db_name):

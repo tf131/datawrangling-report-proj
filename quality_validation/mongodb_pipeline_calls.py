@@ -18,6 +18,7 @@ def get_mongodb_db(db_name):
     client = MongoClient(config['mongodb']['connection_string'])
     return client[db_name]
 
+
 def get_duplicates_list_of_lists(matching_field):
     matching_field_with_starting_dollar_symbol = '$' + matching_field
     db = get_mongodb_db("restaurants")
@@ -82,7 +83,3 @@ def get_duplicates_list_of_lists(matching_field):
             empty_list.append(doc)
     empty_list.sort()
     return empty_list
-
-
-
-

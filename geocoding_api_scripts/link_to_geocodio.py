@@ -1,4 +1,4 @@
-#adds (when possible) a document from google places api to the refering database entry - if the google places reply was empty, the item remains unchanged
+# adds (when possible) a document from codio api to the refering database entry - if the codio reply was empty, the item remains unchanged
 import configparser
 import json
 
@@ -11,10 +11,8 @@ config = configparser.ConfigParser()
 config.read('../conf.ini')
 
 logging.basicConfig(level=logging.INFO)
-google_places_api_key = config['api_keys']['googleplaces']
-URL1 = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input="
-URL2 = "&inputtype=textquery&fields=formatted_address,geometry,icon,name,permanently_closed,photos,place_id," \
-       "plus_code,types,price_level,rating,user_ratings_total&key="
+api_key = config['api_keys']['geocodio']
+URL1 = "https://api.geocod.io/v1.4/geocode?q="
 
 
 def get_mongodb_db(db_name):
@@ -35,12 +33,13 @@ for result in results:
 
     searchtext = name + " " + address + " " + city
     logging.info(searchtext)
-    r = requests.get(url=URL1 + searchtext + URL2 + google_places_api_key)
+    u = (URL1 + searchtext + "&api_key=" + api_key)
+    r = requests.get(url=URL1 + searchtext + "&api_key=" + api_key)
     raw_data = r.json()
     try:
         # take the first candidate from api reply
-        data = raw_data['candidates'][0]
+        data = str(raw_data['results'][0]['location'])
         logging.info(json.dumps(data))
-        collection.update_one({"_id": id}, {"$set": {"google_place_search_api_result": data}})
+        collection.update_one({"_id": id}, {"$set": {"geocodio_search_api_result": {'geolocation_as_string': data}}})
     except:
         logging.warning("No refs found for the searchtext: " + searchtext)

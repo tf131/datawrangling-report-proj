@@ -3,6 +3,7 @@ import csv
 
 matching_field_google_places_api = 'google_place_search_api_result.place_id'
 matching_field_here_api = 'here_api_result.Location.LocationId'
+matching_field_geocodio = 'geocodio_search_api_result.geolocation_as_string'
 
 
 # calculate the precision for a goldstandard list of duplicate and a predicted list of duplicates
@@ -42,12 +43,17 @@ def get_gold_standard_dpl_list_from_data():
     return return_list_of_lists
 
 
-print(calc_precision(get_gold_standard_dpl_list_from_data(),
-                     mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_google_places_api)))
-print(calc_recall(get_gold_standard_dpl_list_from_data(),
-                  mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_google_places_api)))
+# print(calc_precision(get_gold_standard_dpl_list_from_data(),
+#                      mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_google_places_api)))
+# print(calc_recall(get_gold_standard_dpl_list_from_data(),
+#                   mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_google_places_api)))
 
 print(calc_precision(get_gold_standard_dpl_list_from_data(),
-                     mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_here_api)))
+                     mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_geocodio)))
 print(calc_recall(get_gold_standard_dpl_list_from_data(),
-                  mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_here_api)))
+                  mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_geocodio)))
+
+# print(calc_precision(get_gold_standard_dpl_list_from_data(),
+#                      mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_here_api)))
+# print(calc_recall(get_gold_standard_dpl_list_from_data(),
+#                   mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_here_api)))
