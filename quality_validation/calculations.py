@@ -1,9 +1,9 @@
 from quality_validation import mongodb_pipeline_calls
 import csv
 
-matching_field_google_places_api = 'google_place_search_api_result.place_id'
-matching_field_here_api = 'here_api_result.Location.LocationId'
-matching_field_geocodio = 'geocodio_search_api_result.geolocation_as_string'
+dict_apis = [{'google_places_api': 'google_place_search_api_result.place_id'},
+             {'here_api': 'here_api_result.Location.LocationId'},
+             {'geocodio_api': 'geocodio_search_api_result.geolocation_as_string'}]
 
 
 # calculate the precision for a goldstandard list of duplicate and a predicted list of duplicates
@@ -29,6 +29,11 @@ def calc_recall(listGolddpl, listdpl):
     return TP / (TP + FN)
 
 
+def calc_f1_score(listGolddpl, listdpl):
+    return (2 * (calc_recall(listGolddpl, listdpl) * calc_precision(listGolddpl, listdpl)) / (
+            calc_recall(listGolddpl, listdpl) + calc_precision(listGolddpl, listdpl)))
+
+
 def get_gold_standard_dpl_list_from_data():
     elem_list = list()
     return_list_of_lists = list()
@@ -43,17 +48,14 @@ def get_gold_standard_dpl_list_from_data():
     return return_list_of_lists
 
 
-# print(calc_precision(get_gold_standard_dpl_list_from_data(),
-#                      mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_google_places_api)))
-# print(calc_recall(get_gold_standard_dpl_list_from_data(),
-#                   mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_google_places_api)))
-
-print(calc_precision(get_gold_standard_dpl_list_from_data(),
-                     mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_geocodio)))
-print(calc_recall(get_gold_standard_dpl_list_from_data(),
-                  mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_geocodio)))
-
-# print(calc_precision(get_gold_standard_dpl_list_from_data(),
-#                      mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_here_api)))
-# print(calc_recall(get_gold_standard_dpl_list_from_data(),
-#                   mongodb_pipeline_calls.get_duplicates_list_of_lists(matching_field_here_api)))
+for elem in dict_apis:
+    for key, value in elem.items():
+        print(key + ' Precision result ' + str(calc_precision(get_gold_standard_dpl_list_from_data(),
+                                                              mongodb_pipeline_calls.get_duplicates_list_of_lists(
+                                                                  value))))
+        print(key + ' Recall result ' + str(calc_recall(get_gold_standard_dpl_list_from_data(),
+                                                        mongodb_pipeline_calls.get_duplicates_list_of_lists(
+                                                            value))))
+        print(key + ' f1 score result ' + str(calc_f1_score(get_gold_standard_dpl_list_from_data(),
+                                                            mongodb_pipeline_calls.get_duplicates_list_of_lists(
+                                                                value))))
