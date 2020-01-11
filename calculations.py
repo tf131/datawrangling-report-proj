@@ -1,4 +1,4 @@
-from quality_validation import mongodb_pipeline_calls
+import mongodb_pipeline_calls
 import csv
 
 dict_apis = [{'google_places_api': 'google_place_search_api_result.place_id'},
@@ -37,7 +37,7 @@ def calc_f1_score(listGolddpl, listdpl):
 def get_gold_standard_dpl_list_from_data():
     elem_list = list()
     return_list_of_lists = list()
-    with open('../data/restaurants_DPL.tsv') as tsvfile:
+    with open('data/restaurants_DPL.tsv') as tsvfile:
         reader = csv.DictReader(tsvfile, dialect='excel-tab')
         for row in reader:
             elem_list.append(int(row['id1']))
@@ -48,14 +48,18 @@ def get_gold_standard_dpl_list_from_data():
     return return_list_of_lists
 
 
-for elem in dict_apis:
-    for key, value in elem.items():
-        print(key + ' Precision result ' + str(calc_precision(get_gold_standard_dpl_list_from_data(),
-                                                              mongodb_pipeline_calls.get_duplicates_list_of_lists(
-                                                                  value))))
-        print(key + ' Recall result ' + str(calc_recall(get_gold_standard_dpl_list_from_data(),
-                                                        mongodb_pipeline_calls.get_duplicates_list_of_lists(
-                                                            value))))
-        print(key + ' f1 score result ' + str(calc_f1_score(get_gold_standard_dpl_list_from_data(),
+def calcer(mongodb_collection, dict_apis):
+    for elem in dict_apis:
+        for key, value in elem.items():
+            print(key + ' Precision result ' + str(calc_precision(get_gold_standard_dpl_list_from_data(),
+                                                                  mongodb_pipeline_calls.get_duplicates_list_of_lists(
+                                                                      mongodb_collection,
+                                                                      value))))
+            print(key + ' Recall result ' + str(calc_recall(get_gold_standard_dpl_list_from_data(),
                                                             mongodb_pipeline_calls.get_duplicates_list_of_lists(
+                                                                mongodb_collection,
                                                                 value))))
+            print(key + ' f1 score result ' + str(calc_f1_score(get_gold_standard_dpl_list_from_data(),
+                                                                mongodb_pipeline_calls.get_duplicates_list_of_lists(
+                                                                    mongodb_collection,
+                                                                    value))))

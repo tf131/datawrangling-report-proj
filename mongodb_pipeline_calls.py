@@ -1,29 +1,9 @@
-import configparser
-import csv
-import logging
 import itertools
 
-from pymongo import MongoClient
 
-# configure logging
-logging.basicConfig(level=logging.DEBUG)
-
-# load the configfile
-config = configparser.ConfigParser()
-
-config.read('../conf.ini')
-
-
-def get_mongodb_db(db_name):
-    client = MongoClient(config['mongodb']['connection_string'])
-    return client[db_name]
-
-
-def get_duplicates_list_of_lists(matching_field):
+def get_duplicates_list_of_lists(mongodb_collection, matching_field):
     matching_field_with_starting_dollar_symbol = '$' + matching_field
-    db = get_mongodb_db("restaurants")
-    collection = db["restaurants_basic"]
-    results = collection.aggregate([
+    results = mongodb_collection.aggregate([
         {
             '$addFields': {
                 'id_to_int': {
