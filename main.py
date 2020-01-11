@@ -6,6 +6,7 @@ from link_to_hereapi import link_to_hereapi
 from link_to_googleplaceapi import link_to_googleplaceapi
 from link_to_geocodio import link_to_geocodio
 from pymongo import MongoClient
+from visualization.mapbox_plot import mapplot
 
 # load the configfile
 config = configparser.ConfigParser()
@@ -36,8 +37,11 @@ def main():
     # linkDatabase
     # link_to_hereapi(mongodb_collection, api_key=config['api_keys']['here'])
     # link_to_googleplaceapi(mongodb_collection, api_key=config['api_keys']['googleplaces'])
-    link_to_geocodio(mongodb_collection, config['api_keys']['geocodio'])
+    # link_to_geocodio(mongodb_collection, config['api_keys']['geocodio'])
     calcer(mongodb_collection, unique_identifiers)
+
+    # optional
+    mapplot(mongodb_collection, api_key=config['api_keys']['mapbox'])
 
 
 if __name__ == '__main__':
