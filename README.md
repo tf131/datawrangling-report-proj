@@ -68,7 +68,7 @@ open *conf.ini* in a text editor of your choice and replace the dummy API keys. 
 1. define a database name for mongoDB, which is used
 
 ### Run code
-call the main function
+comment/uncomment lines and call the main function
 `python main.py`
 
 ```python
