@@ -19,6 +19,9 @@ windows: `venv\Scripts\activate`
 1. install requirements
 `pip install -r requirements.txt`
 3. The config file conf.ini has to be adapted.
-1.1 Create your own API Keys for: hereapi, google places and geocodio
-1.2 Fill in your mongoDB connection string
+1.1. Create your own API Keys for: 
+1.1.1. hereapi https://developer.here.com/
+1.1.1. google place search https://developers.google.com/places/web-service/search 
+1.1.1. geocodio https://www.geocod.io/docs/
+1.2. Fill in your mongoDB connection string
 1. run the main function
