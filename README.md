@@ -1,6 +1,7 @@
-# Duplicate detection on a generic restaurant databaseusing different geocoding providers
+# Duplicate detection on a generic restaurant database using different geocoding providers
+*Dataset: https://hpi.de/naumann/projects/repeatability/datasets/restaurants-dataset.html*
 ## Getting Started
-Clone the repository to your local machine and change to that directory.
+Clone the repository to your local machine and navigate to that directory.
 
 ```
 git clone https://github.com/tf131/datawrangling-report-proj.git
@@ -66,7 +67,27 @@ open *conf.ini* in a text editor of your choice and replace the dummy API keys. 
 1. connection string to your mongoDB instance (either local or on https://www.mongodb.com/cloud/atlas)
 1. define a database name for mongoDB, which is used
 
+### Run code
+call the main function
+`python main.py`
 
+```python
+def main():
+    # get mongoDB collection object. Used for any further mongodb querys.
+    mongodb_collection = get_mongodb_db_collection()
+    # fill the mongodb collection with initial data from
+    # https://hpi.de/naumann/projects/repeatability/datasets/restaurants-dataset.html
+    initial_fill_database(mongodb_collection)
+    # link database to api providers
+    link_to_hereapi(mongodb_collection, api_key=config['api_keys']['here'])
+    link_to_googleplaceapi(mongodb_collection, api_key=config['api_keys']['googleplaces'])
+    link_to_geocodio(mongodb_collection, config['api_keys']['geocodio'])
+    #calculate precision, recall and f1score
+    calcer(mongodb_collection, unique_identifiers)
+
+    # optional: plot location information to map (based on Google place search)
+    mapplot(mongodb_collection, api_key=config['api_keys']['mapbox'])
+```
 ## Authors
 
 * **Tim Fischer** - *Initial work*
