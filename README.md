@@ -6,7 +6,7 @@ During installation, make sure to add Python to environment variables.
 
 1. Clone the repository to your local machine and navigate there
 1. make sure you are running PYTHON3.8.1:
-'python -V'
+`python -V`
 1. on debian based os, install virtualenv driver
 `sudo apt-get install python38-venv`
 1. create a new PHYTHON3.8 environment, activate it and install all requirements
