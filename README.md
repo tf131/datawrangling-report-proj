@@ -1,27 +1,48 @@
 # Duplicate detection on a generic restaurant databaseusing different geocoding providers
 ## Getting Started
+Clone the repository to your local machine and change to that directory.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+```
+git clone https://github.com/tf131/datawrangling-report-proj.git
+cd .\datawrangling-report-proj\
+
+```
 
 ### Prerequisites
+The runtime environment for this project were:
+* Windows 10 Pro Version 10.0.19536 Build 19536
+* Python 3.8.1
 
+**Code should also work on any Linux distribution and MacOS with installed > Python 3.7**
+
+### Installing on Windows
+Check if python is working and you run version 3.7 or higher.
 ```
-Install Python to your local machine
+python -V
+>> Python 3.8.1
 ```
-https://www.python.org/downloads/
-
-### Installing
+If getting issues, check: https://geek-university.com/python/add-python-to-the-windows-path/
 
 
+create a new Python virtualenv and activate it
+```
+python -m venv ./venv
+venv\Scripts\activate
+```
 
-Install Python3 to your local machine
-https://www.python.org/downloads/release/python-381/
-During installation, make sure to add Python to environment variables.
+install python requirements
+`pip install -r requirements.txt`
+
+open *conf.ini* in a text editor of your choice and replace the dummy API keys. They can be created for free at their websites below.
+1. here geocoder: https://developer.here.com/
+1. google place search: https://developers.google.com/places/web-service/search 
+1. geocodio: https://www.geocod.io/docs/
+1. mapbox: https://docs.mapbox.com/api/
 
 
-1. Clone the repository to your local machine and navigate there
-1. make sure you are running PYTHON3.8.1:
-`python -V`
+
+
+
 1. on debian based os, install virtualenv driver
 `sudo apt-get install python38-venv`
 1. create a new PHYTHON3.8 environment, activate it and install all requirements
