@@ -41,22 +41,39 @@ open *conf.ini* in a text editor of your choice and replace the dummy API keys. 
 
 
 
+### Installing on Debian based Linux
+Check if python is working and you run version 3.7 or higher.
+```
+python -V
+>> Python 3.8.1
+```
 
-
-1. on debian based os, install virtualenv driver
+install virtualenv driver for your python version. (here: python38-venv)
 `sudo apt-get install python38-venv`
-1. create a new PHYTHON3.8 environment, activate it and install all requirements
-`python -m venv ./venv`
-1. activate your virtualenv
-1.1. debian based: `source venv/bin/activate`
-1.1. windows: `venv\Scripts\activate`
-1. upgrade pip (optional)
-`python -m pip install --upgrade pip`
-1. install requirements
+create a new Python virtualenv and activate it
+```
+python -m venv venv
+source venv/bin/activate
+```
+install python requirements
 `pip install -r requirements.txt`
-3. The config file conf.ini has to be adapted - create your own API Keys for: 
-1.1. here geocoder: https://developer.here.com/
-1.1. google place search: https://developers.google.com/places/web-service/search 
-1.1. geocodio: https://www.geocod.io/docs/
-1.1. Fill in your mongoDB connection string
-1. run the main function
+
+open *conf.ini* in a text editor of your choice and replace the dummy API keys. They can be created for free at their websites below.
+1. here geocoder: https://developer.here.com/
+1. google place search: https://developers.google.com/places/web-service/search 
+1. geocodio: https://www.geocod.io/docs/
+1. mapbox: https://docs.mapbox.com/api/
+1. connection string to your mongoDB instance (either local or on https://www.mongodb.com/cloud/atlas)
+1. define a database name for mongoDB, which is used
+
+
+## Authors
+
+* **Tim Fischer** - *Initial work*
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+## Contributing
+
+Please read [CONTRIBUTING.md](https://github.com/tf131/datawrangling-report-proj/blob/master/CONTRIBUTING.md)
