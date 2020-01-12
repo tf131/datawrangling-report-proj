@@ -1,5 +1,20 @@
-# This repository contains a project for the course DMDB / OTH REGENSBURG
-Install Python3.8.1 to your local machine
+# Duplicate detection on a generic restaurant databaseusing different geocoding providers
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+```
+Install Python to your local machine
+```
+https://www.python.org/downloads/
+
+### Installing
+
+
+
+Install Python3 to your local machine
 https://www.python.org/downloads/release/python-381/
 During installation, make sure to add Python to environment variables.
 
