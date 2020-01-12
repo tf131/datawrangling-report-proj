@@ -7,6 +7,10 @@
 `sudo apt-get install python38-venv`
 1. create a new PHYTHON3.8 environment, activate it and install all requirements
 `python3.8 -m venv ./venv`
+1. activate your virtualenv
+`source venv/bin/activate`
+1. install requirements
+`pip install -r requirements.txt`
 3. The config file conf.ini has to be adapted:
 1.1 Create your own API Keys for: hereapi, google places and geocodio
 1.2 Fill in your mongoDB connection string
