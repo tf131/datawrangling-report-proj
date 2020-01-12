@@ -76,4 +76,4 @@ open *conf.ini* in a text editor of your choice and replace the dummy API keys. 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/tf131/datawrangling-report-proj/blob/master/CONTRIBUTING.md)
+Please read [CONTRIBUTING.md](CONTRIBUTING.md)
