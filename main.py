@@ -36,9 +36,9 @@ def main():
     # https://hpi.de/naumann/projects/repeatability/datasets/restaurants-dataset.html
     initial_fill_database(mongodb_collection)
     # link database to api providers
-    # link_to_hereapi(mongodb_collection, api_key=config['api_keys']['here'])
-    # link_to_googleplaceapi(mongodb_collection, api_key=config['api_keys']['googleplaces'])
-    # link_to_geocodio(mongodb_collection, config['api_keys']['geocodio'])
+    link_to_hereapi(mongodb_collection, api_key=config['api_keys']['here'])
+    link_to_googleplaceapi(mongodb_collection, api_key=config['api_keys']['googleplaces'])
+    link_to_geocodio(mongodb_collection, config['api_keys']['geocodio'])
     # calculate precision, recall and f1score
     calcer(mongodb_collection, unique_identifiers)
 
