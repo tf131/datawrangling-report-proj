@@ -67,6 +67,10 @@ open *conf.ini* in a text editor of your choice and replace the dummy API keys. 
 1. connection string to your mongoDB instance (either local or on https://www.mongodb.com/cloud/atlas)
 1. define a database name for mongoDB, which is used
 
+### Architecture overview
+<img src="/images/architecture_overview.png" alt="Architecture"
+	title="Architectur" width="500" />
+
 ### Run code
 comment/uncomment lines and call the main function
 `python main.py`
