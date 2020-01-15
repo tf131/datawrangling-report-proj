@@ -67,6 +67,9 @@ open *conf.ini* in a text editor of your choice and replace the dummy API keys. 
 1. connection string to your mongoDB instance (either local or on https://www.mongodb.com/cloud/atlas)
 1. define a database name for mongoDB, which is used
 
+### Architecture overview
+[[https://github.com/tf131/datawrangling-report-proj/blob/master/images/architecture_overview.png|alt=octocat]]
+
 ### Run code
 comment/uncomment lines and call the main function
 `python main.py`
