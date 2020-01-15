@@ -68,7 +68,7 @@ open *conf.ini* in a text editor of your choice and replace the dummy API keys. 
 1. define a database name for mongoDB, which is used
 
 ### Architecture overview
-[[https://github.com/tf131/datawrangling-report-proj/blob/master/images/architecture_overview.png|alt=octocat]]
+![Architecture](https://github.com/tf131/datawrangling-report-proj/blob/master/images/architecture_overview.png | width = 100)
 
 ### Run code
 comment/uncomment lines and call the main function
