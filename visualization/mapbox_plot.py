@@ -32,9 +32,11 @@ def mapplot(mongodb_collection, api_key):
 
     BBox = ((df.longitude.min(), df.longitude.max(),
              df.latitude.min(), df.latitude.max()))
-
+    # set mapbox acess token
     px.set_mapbox_access_token(api_key)
     # fig = px.scatter_mapbox(df, lat="latitude", lon="longitude", text="formatted_name", zoom=4)
     # fig = px.scatter_mapbox(df, lat="latitude", lon="longitude", zoom=4, size="size")
+
+    # plot figure (density mapbox)
     fig = px.density_mapbox(df, lat="latitude", lon="longitude", radius=25, zoom=2, mapbox_style="light")
     fig.show()

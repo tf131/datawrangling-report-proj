@@ -1,39 +1,40 @@
 import mongodb_pipeline_calls
 import csv
 
-dict_apis = [{'google_places_api': 'google_place_search_api_result.place_id'},
-             {'here_api': 'here_api_result.Location.LocationId'},
-             {'geocodio_api': 'geocodio_search_api_result.geolocation_as_string'}]
-
 
 # calculate the precision for a goldstandard list of duplicate and a predicted list of duplicates
-def calc_precision(listGolddpl, listdpl):
-    listGolddpl = get_gold_standard_dpl_list_from_data()
+
+def calc_precision(goldstandard_duplicates_list, duplicates_list):
+    goldstandard_duplicates_list = get_gold_standard_dpl_list_from_data()
     TP = 0
-    for elem in listdpl:
-        if elem in listGolddpl:
+    for elem in duplicates_list:
+        if elem in goldstandard_duplicates_list:
             TP += 1
-    return TP / len(listdpl)
+    return TP / len(duplicates_list)
 
+# calculate the recall for a goldstandard list of duplicate and a predicted list of duplicates
 
-def calc_recall(listGolddpl, listdpl):
-    listGolddpl = get_gold_standard_dpl_list_from_data()
+def calc_recall(goldstandard_duplicates_list, duplicates_list):
+    goldstandard_duplicates_list = get_gold_standard_dpl_list_from_data()
     TP = 0
     FN = 0
-    for elem in listdpl:
-        if elem in listGolddpl:
+    for elem in duplicates_list:
+        if elem in goldstandard_duplicates_list:
             TP += 1
-    for elem in listGolddpl:
-        if elem not in listdpl:
+    for elem in goldstandard_duplicates_list:
+        if elem not in duplicates_list:
             FN += 1
     return TP / (TP + FN)
 
+# calculate the f1 score for a goldstandard list of duplicate and a predicted list of duplicates
 
-def calc_f1_score(listGolddpl, listdpl):
-    return (2 * (calc_recall(listGolddpl, listdpl) * calc_precision(listGolddpl, listdpl)) / (
-            calc_recall(listGolddpl, listdpl) + calc_precision(listGolddpl, listdpl)))
+def calc_f1_score(goldstandard_duplicates_list, duplicates_list):
+    return (2 * (calc_recall(goldstandard_duplicates_list, duplicates_list) * calc_precision(
+        goldstandard_duplicates_list, duplicates_list)) / (
+                    calc_recall(goldstandard_duplicates_list, duplicates_list) + calc_precision(
+                goldstandard_duplicates_list, duplicates_list)))
 
-
+# loads the restaurants_DPL.tsv file and returns a list with the all pairs
 def get_gold_standard_dpl_list_from_data():
     elem_list = list()
     return_list_of_lists = list()
@@ -47,7 +48,7 @@ def get_gold_standard_dpl_list_from_data():
             elem_list.clear()
     return return_list_of_lists
 
-
+#calculation function
 def calcer(mongodb_collection, dict_apis):
     for elem in dict_apis:
         for key, value in elem.items():

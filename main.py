@@ -12,10 +12,10 @@ from visualization.mapbox_plot import mapplot
 config = configparser.ConfigParser()
 config.read('./conf.ini')
 
-# logging
+# implement logging
 logging.basicConfig(level=logging.INFO)
 
-# unique index dictionary
+# unique indexing for deduplication (dictionary)
 unique_identifiers = [{'google_places_api': 'google_place_search_api_result.place_id'},
                       {'here_api': 'here_api_result.Location.LocationId'},
                       {'geocodio_api': 'geocodio_search_api_result.geolocation_as_string'}]
@@ -30,17 +30,20 @@ def get_mongodb_db_collection():
 
 
 def main():
-    # get a collection from mongoDB
+    # get mongoDB collection object. Used for any further mongodb querys.
     mongodb_collection = get_mongodb_db_collection()
-    # fill_database
-    # initial_fill_database(mongodb_collection)
-    # linkDatabase
+    # fill the mongodb collection with initial data from
+    # https://hpi.de/naumann/projects/repeatability/datasets/restaurants-dataset.html
+    initial_fill_database(mongodb_collection)
+    # link database to api providers
     # link_to_hereapi(mongodb_collection, api_key=config['api_keys']['here'])
     # link_to_googleplaceapi(mongodb_collection, api_key=config['api_keys']['googleplaces'])
     # link_to_geocodio(mongodb_collection, config['api_keys']['geocodio'])
+    # calculate precision, recall and f1score
     calcer(mongodb_collection, unique_identifiers)
 
-    # optional
+    # optional: plot location information to map (based on Google place search)
+    # this should open a new browser window
     mapplot(mongodb_collection, api_key=config['api_keys']['mapbox'])
 
 

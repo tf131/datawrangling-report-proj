@@ -47,7 +47,7 @@ def get_duplicates_list_of_lists(mongodb_collection, matching_field):
 
     ])
 
-    empty_list = list()
+    return_list = list()
 
     for doc in results:
         doc = doc['id_array']
@@ -57,9 +57,9 @@ def get_duplicates_list_of_lists(mongodb_collection, matching_field):
             for itterator_comb in list(comb):
                 itterator_comb = list(itterator_comb)
                 itterator_comb.sort()
-                empty_list.append(itterator_comb)
+                return_list.append(itterator_comb)
         else:
             doc.sort()
-            empty_list.append(doc)
-    empty_list.sort()
-    return empty_list
+            return_list.append(doc)
+    return_list.sort()
+    return return_list
